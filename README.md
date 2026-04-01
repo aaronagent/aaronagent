@@ -28,6 +28,7 @@
 | [**openclaw**](https://github.com/aaronagent/openclaw) | 🦞 个人 AI 助理平台 — 全平台、全系统 | TypeScript |
 | [**raven**](https://github.com/aaronagent/raven) | 🐦‍⬛ GitHub Copilot 代理，翻译请求至 Anthropic/OpenAI API，附带用量 Dashboard | Proxy, API |
 | [**quant-trading-system**](https://github.com/aaronagent/quant-trading-system) | 📈 A 股量化交易系统 — 可插拔数据源、多策略回测、风险管理 | Python, Quant |
+| [**claude-code-source-analysis**](https://github.com/aaronagent/claude-code-source-analysis) | 🔬 Claude Code 源码深度解析 — 22 章学习手册 + [可视化学习网页](https://aaronagent.github.io/claude-code-source-analysis/) | TypeScript, Prompt Engineering |
 | [**cave-forest**](https://github.com/aaronagent/cave-forest) | 🌿 地下反向森林 — 贵州溶洞探险网页游戏 | HTML, Game |
 | [**jiucai-game**](https://github.com/aaronagent/jiucai-game) | 🥬 韭菜求生记 — 2026 年 3 月股灾模拟器小游戏 | HTML, Game |
 

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AARON AGENT — AI Engineer</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;--surface:#12121a;--surface2:#1a1a26;--border:#2a2a3a;
+  --text:#e8e8f0;--text2:#8888a0;--accent:#6c63ff;--accent2:#4f46e5;
+  --green:#22c55e;--cyan:#06b6d4;--orange:#f59e0b;--pink:#ec4899;
+}
+html{scroll-behavior:smooth}
+body{font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none;transition:color .2s}
+a:hover{color:#8b83ff}
+::selection{background:var(--accent2);color:#fff}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* Animated background */
+.bg-grid{position:fixed;inset:0;z-index:-1;background-image:
+  radial-gradient(circle at 20% 30%,rgba(108,99,255,.06) 0%,transparent 50%),
+  radial-gradient(circle at 80% 70%,rgba(236,72,153,.04) 0%,transparent 50%),
+  linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,60px 60px,60px 60px}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(42,42,58,.5)}
+nav .logo{font-weight:800;font-size:1.1rem;background:linear-gradient(135deg,var(--accent),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+nav .links{display:flex;gap:1.5rem}
+nav .links a{color:var(--text2);font-size:.85rem;font-weight:500;transition:color .2s}
+nav .links a:hover{color:var(--text)}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem 4rem;position:relative}
+.hero-content{max-width:800px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.2);border-radius:20px;font-size:.8rem;color:var(--accent);margin-bottom:1.5rem}
+.hero-badge .dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(2.5rem,7vw,4.5rem);font-weight:800;line-height:1.1;margin-bottom:1rem}
+.hero h1 .gradient{background:linear-gradient(135deg,var(--accent),var(--pink),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:gradientShift 5s ease infinite}
+@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.hero p{font-size:1.15rem;color:var(--text2);max-width:600px;margin:0 auto 2rem;line-height:1.8}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.6rem;border-radius:8px;font-size:.9rem;font-weight:600;transition:all .25s;border:none;cursor:pointer}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#7c74ff;transform:translateY(-2px);box-shadow:0 8px 25px rgba(108,99,255,.3);color:#fff}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+
+/* Section */
+section{padding:5rem 0}
+.container{max-width:1100px;margin:0 auto;padding:0 2rem}
+.section-label{font-size:.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:.5rem}
+.section-title{font-size:2.2rem;font-weight:800;margin-bottom:.5rem}
+.section-desc{color:var(--text2);margin-bottom:3rem;font-size:1.05rem}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.tag{padding:.35rem .8rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;font-size:.8rem;color:var(--text2)}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.about-stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;transition:all .3s}
+.about-stat:hover{border-color:var(--accent);transform:translateY(-3px)}
+.about-stat .val{font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.about-stat .lbl{font-size:.8rem;color:var(--text2);margin-top:.25rem}
+
+/* Projects */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.25rem}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:all .3s;display:flex;flex-direction:column}
+.project-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.project-card .p-head{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
+.project-card .p-icon{font-size:1.5rem}
+.project-card .p-name{font-weight:700;font-size:1.05rem;flex:1}
+.project-card .p-tag{font-size:.65rem;padding:.15rem .5rem;border-radius:10px;font-weight:600}
+.tag-hot{background:rgba(236,72,153,.12);color:var(--pink)}
+.tag-new{background:rgba(34,197,94,.12);color:var(--green)}
+.tag-star{background:rgba(245,158,11,.12);color:var(--orange)}
+.project-card .p-desc{color:var(--text2);font-size:.88rem;line-height:1.6;flex:1;margin-bottom:1rem}
+.project-card .p-tech{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.75rem}
+.project-card .p-tech span{font-size:.7rem;padding:.15rem .4rem;background:var(--surface2);border-radius:4px;color:var(--text2)}
+.project-card .p-links{display:flex;gap:.75rem}
+.project-card .p-links a{font-size:.8rem;font-weight:600}
+
+/* Tech */
+.tech-categories{display:flex;flex-direction:column;gap:2rem}
+.tech-cat-title{font-size:.85rem;font-weight:700;color:var(--text2);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.tech-cat-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.tech-items{display:flex;flex-wrap:wrap;gap:.75rem}
+.tech-item{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:.85rem;font-weight:500;transition:all .25s}
+.tech-item:hover{border-color:var(--accent);transform:scale(1.04)}
+.tech-item .emoji{font-size:1.1rem}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.contact-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center;transition:all .3s}
+.contact-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.contact-card .c-icon{font-size:1.8rem;margin-bottom:.5rem}
+.contact-card .c-label{font-size:.75rem;color:var(--text2);margin-bottom:.25rem}
+.contact-card .c-value{font-weight:600;font-size:.9rem}
+
+/* Footer */
+footer{padding:3rem 0;text-align:center;border-top:1px solid var(--border)}
+footer p{color:var(--text2);font-size:.8rem}
+
+/* Responsive */
+@media(max-width:768px){
+  nav .links{gap:.75rem}
+  .about-grid{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .hero h1{font-size:2.2rem}
+  .container{padding:0 1.25rem}
+}
+
+/* Fade in animation */
+.fade-up{opacity:0;transform:translateY(30px);transition:all .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<!-- Nav -->
+<nav>
+  <div class="logo">AARON AGENT</div>
+  <div class="links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#tech">Tech</a>
+    <a href="https://github.com/aaronagent">GitHub</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Open to collaboration</div>
+    <h1>Building the Future<br>of <span class="gradient">Intelligent Agents</span></h1>
+    <p>清华大学毕业 · 大型美国科技企业 AI Engineer<br>专注 AI Agent、Browser Automation、LLM Infrastructure 与量化交易</p>
+    <div class="hero-btns">
+      <a class="btn btn-primary" href="#projects">View Projects</a>
+      <a class="btn btn-ghost" href="https://github.com/aaronagent">GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid fade-up">
+      <div>
+        <div class="section-label">About Me</div>
+        <div class="section-title">Hi, I'm AARON 👋</div>
+        <p style="color:var(--text2);margin-top:1rem;line-height:1.8">
+          清华大学计算机科学毕业，目前在一家大型美国科技企业担任 AI Engineer。
+          热衷于构建智能 Agent 系统，从浏览器自动化到 LLM 基础设施，再到量化交易策略。
+          相信 AI 将深刻改变每一个工作流，正在用代码让这件事发生。
+        </p>
+        <div class="about-tags">
+          <span class="tag">🎓 Tsinghua University</span>
+          <span class="tag">🏢 Big Tech (US)</span>
+          <span class="tag">🤖 AI Agent</span>
+          <span class="tag">🌐 Browser Automation</span>
+          <span class="tag">📈 Quant Trading</span>
+          <span class="tag">🧠 LLM Infra</span>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="about-stat"><div class="val">27+</div><div class="lbl">Public Repos</div></div>
+        <div class="about-stat"><div class="val">11</div><div class="lbl">Projects (March)</div></div>
+        <div class="about-stat"><div class="val">512K+</div><div class="lbl">Lines Analyzed</div></div>
+        <div class="about-stat"><div class="val">40+</div><div class="lbl">Tools Built</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" style="padding-top:5rem">
+  <div class="container">
+    <div class="section-label fade-up">Featured Projects</div>
+    <div class="section-title fade-up">Recent Work (2026.03)</div>
+    <div class="section-desc fade-up">最近一个月的重点项目，涵盖 AI Agent、源码分析、量化系统</div>
+
+    <div class="projects-grid">
+
+      <div class="project-card fade-up">
+        <div class="p-head">
+          <span class="p-icon">🔬</span>
+          <span class="p-name">claude-code-source-analysis</span>
+          <span class="p-tag tag-new">NEW</span>
+        </div>
+        <div class="p-desc">Claude Code 源码深度解析 — 22 章完整学习手册 + 可视化交互学习网页。从架构到 Prompt 工程全覆盖。</div>
+        <div class="p-tech"><span>TypeScript</span><span>Prompt Engineering</span><span>22 Chapters</span></div>
+        <div class="p-links">
+          <a href="https://github.com/aaronagent/claude-code-source-analysis">GitHub →</a>
+          <a href="https://aaronagent.github.io/claude-code-source-analysis/">在线学习 →</a>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="p-head">
+          <span class="p-icon">🏆</span>
+          <span class="p-name">apex-browser-agent</span>
+          <span class="p-tag tag-hot">HOT</span>
+        </div>
+        <div class="p-desc">State-of-the-art 浏览器自动化 Agent。DOM-First 感知 + 4-Agent 协作架构，超越 browser-use。</div>
+        <div class="p-tech"><span>Multi-Agent</span><span>DOM Compression</span><span>Copilot API</span></div>
+        <div class="p-links"><a href="https://github.com/aaronagent/apex-browser-agent">GitHub →</a></div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="p-head">
+          <span class="p-icon">🖥️</span>
+          <span class="p-name">copilot-computer-use</span>
+          <span class="p-tag tag-star">⭐</span>
+        </div>
+        <div class="p-desc">全球首个基于 GitHub Copilot API 的免费 Computer Use 代理。截图 → 视觉分析 → 操作执行。</div>
+        <div class="p-tech"><span>Python</span><span>Vision</span><span>Copilot API</span></div>
+        <div class="p-links"><a href="https://github.com/aaronagent/copilot-computer-use">GitHub →</a></div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="p-head">
+          <span class="p-icon">📈</span>
+          <span class="p-name">quant-trading-system</span>
+          <span class="p-tag tag-hot">HOT</span>
+        </div>
+        <div class="p-desc">A 股量化交易系统 — 可插拔数据源、多策略回测、风险管理模块。</div>
+        <div class="p-tech"><span>Python</span><span>Quant</span><span>Multi-Strategy</span></div>
+        <div class="p-links"><a href="https://github.com/aaronagent/quant-trading-system">GitHub →</a></div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="p-head">
+          <span class="p-icon">🐦‍⬛</span>
+          <span class="p-name">raven</span>
+        </div>
+        <div class="p-desc">GitHub Copilot 代理 — 翻译请求至 Anthropic/OpenAI API，附带用量 Dashboard。</div>
+        <div class="p-tech"><span>Proxy</span><span>API Translation</span><span>Dashboard</span></div>
+        <div class="p-links"><a href="https://github.com/aaronagent/raven">GitHub →</a></div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="p-head">
+          <span class="p-icon">🧠</span>
+          <span class="p-name">claude-memory</span>
+        </div>
+        <div class="p-desc">Claude Code 跨会话记忆系统，打通 AI 的长期记忆链路，让 AI 记住你。</div>
+        <div class="p-tech"><span>Python</span><span>Memory System</span></div>
+        <div class="p-links"><a href="https://github.com/aaronagent/claude-memory">GitHub →</a></div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="p-head">
+          <span class="p-icon">👁️</span>
+          <span class="p-name">claude-context-visualizer</span>
+        </div>
+        <div class="p-desc">Claude 上下文窗口 Token 可视化 — 动画 SVG gauge、PWA、暗色毛玻璃 UI。</div>
+        <div class="p-tech"><span>JavaScript</span><span>SVG</span><span>PWA</span></div>
+        <div class="p-links"><a href="https://github.com/aaronagent/claude-context-visualizer">GitHub →</a></div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="p-head">
+          <span class="p-icon">🔍</span>
+          <span class="p-name">browser-use-comparison</span>
+        </div>
+        <div class="p-desc">Browser Use 三大主流方案深度对比调研 — Claude Code / OpenClaw 生态分析。</div>
+        <div class="p-tech"><span>Research</span><span>Analysis</span></div>
+        <div class="p-links"><a href="https://github.com/aaronagent/browser-use-comparison">GitHub →</a></div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="p-head">
+          <span class="p-icon">🦞</span>
+          <span class="p-name">openclaw</span>
+        </div>
+        <div class="p-desc">个人 AI 助理平台 — 全平台、全系统、the lobster way.</div>
+        <div class="p-tech"><span>TypeScript</span><span>Full Platform</span></div>
+        <div class="p-links"><a href="https://github.com/aaronagent/openclaw">GitHub →</a></div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="p-head">
+          <span class="p-icon">🌿</span>
+          <span class="p-name">cave-forest</span>
+        </div>
+        <div class="p-desc">地下反向森林 — 贵州溶洞探险网页游戏。基于热搜灵感创作。</div>
+        <div class="p-tech"><span>HTML</span><span>Game</span></div>
+        <div class="p-links"><a href="https://github.com/aaronagent/cave-forest">GitHub →</a></div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="p-head">
+          <span class="p-icon">🥬</span>
+          <span class="p-name">jiucai-game</span>
+        </div>
+        <div class="p-desc">韭菜求生记 — 2026 年 3 月股灾模拟器，基于真实热点的投资模拟小游戏。</div>
+        <div class="p-tech"><span>HTML</span><span>Game</span></div>
+        <div class="p-links"><a href="https://github.com/aaronagent/jiucai-game">GitHub →</a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Tech Stack -->
+<section id="tech" style="padding-top:5rem">
+  <div class="container">
+    <div class="section-label fade-up">Tech Stack</div>
+    <div class="section-title fade-up">技术栈</div>
+    <div class="section-desc fade-up">日常使用的语言、框架与工具</div>
+
+    <div class="tech-categories fade-up">
+      <div>
+        <div class="tech-cat-title">Languages</div>
+        <div class="tech-items">
+          <div class="tech-item"><span class="emoji">🐍</span> Python</div>
+          <div class="tech-item"><span class="emoji">📘</span> TypeScript</div>
+          <div class="tech-item"><span class="emoji">🟨</span> JavaScript</div>
+          <div class="tech-item"><span class="emoji">☕</span> Java</div>
+          <div class="tech-item"><span class="emoji">🦀</span> Rust</div>
+        </div>
+      </div>
+      <div>
+        <div class="tech-cat-title">AI & ML</div>
+        <div class="tech-items">
+          <div class="tech-item"><span class="emoji">🤖</span> Claude API</div>
+          <div class="tech-item"><span class="emoji">🔥</span> PyTorch</div>
+          <div class="tech-item"><span class="emoji">🧠</span> LLM Infra</div>
+          <div class="tech-item"><span class="emoji">🤝</span> MCP Protocol</div>
+          <div class="tech-item"><span class="emoji">💻</span> GitHub Copilot</div>
+        </div>
+      </div>
+      <div>
+        <div class="tech-cat-title">Tools & Infra</div>
+        <div class="tech-items">
+          <div class="tech-item"><span class="emoji">🐳</span> Docker</div>
+          <div class="tech-item"><span class="emoji">🥟</span> Bun</div>
+          <div class="tech-item"><span class="emoji">⚛️</span> React</div>
+          <div class="tech-item"><span class="emoji">📦</span> Node.js</div>
+          <div class="tech-item"><span class="emoji">🗄️</span> PostgreSQL</div>
+          <div class="tech-item"><span class="emoji">☁️</span> AWS / Azure</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p style="font-size:1rem;color:var(--text);margin-bottom:.5rem">AARON AGENT</p>
+    <p>AI Engineer · Tsinghua University · Building Intelligent Agents</p>
+    <p style="margin-top:.75rem">
+      <a href="https://github.com/aaronagent" style="margin:0 .5rem">GitHub</a> ·
+      <a href="https://github.com/aaronagent/claude-code-source-analysis" style="margin:0 .5rem">Latest Project</a>
+    </p>
+    <p style="margin-top:1rem;font-size:.7rem;color:#555">© 2026 AARON AGENT. Built with ❤️</p>
+  </div>
+</footer>
+
+<script>
+// Fade-up animation on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// Smooth nav active state
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY + 100;
+  sections.forEach(s => {
+    const top = s.offsetTop, h = s.offsetHeight, id = s.getAttribute('id');
+    const link = document.querySelector(`nav a[href="#${id}"]`);
+    if (link) { if (y >= top && y < top + h) link.style.color = 'var(--text)'; else link.style.color = ''; }
+  });
+});
+</script>
+</body>
+</html>
