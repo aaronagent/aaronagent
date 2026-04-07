@@ -50,7 +50,7 @@ motto: "Ship fast, think deep, automate everything."
 | 🏆 | [**apex-browser-agent**](https://github.com/aaronagent/apex-browser-agent) | SOTA 浏览器自动化，4-Agent 协作架构 |
 | 🖥️ | [**copilot-computer-use**](https://github.com/aaronagent/copilot-computer-use) | 首个免费 Copilot API Computer Use |
 | 🔍 | [**browser-use-comparison**](https://github.com/aaronagent/browser-use-comparison) | Browser Use 三大方案深度对比 |
-| 🦞 | [**openclaw**](https://github.com/aaronagent/openclaw) | 全平台 AI 助理，the lobster way |
+| 🦞 | [**openclaw**](https://github.com/aaronagent/openclaw) | 全平台 AI 助理，the lobster way · [🔀 PR #58294 merged ↗](https://github.com/openclaw/openclaw/pull/58294) |
 
 </td>
 <td width="50%">
@@ -86,6 +86,14 @@ motto: "Ship fast, think deep, automate everything."
 </td>
 </tr>
 </table>
+
+---
+
+## 🤝 Open Source Contributions
+
+| Date | Project | PR | Description |
+|------|---------|-----|-------------|
+| 2026.04 | [**openclaw/openclaw**](https://github.com/openclaw/openclaw) | [#58294](https://github.com/openclaw/openclaw/pull/58294) ✅ merged | fix(cron): prevent agent default model from overriding cron payload model |
 
 ---
 
