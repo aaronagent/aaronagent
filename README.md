@@ -15,8 +15,6 @@
 
 ```yaml
 name: AARON AGENT
-education: Tsinghua University, Computer Science
-role: AI Engineer @ Major US Tech Company
 focus:
   - AI Agent Systems & Orchestration
   - Browser Automation & Computer Use
@@ -139,18 +137,6 @@ motto: "Ship fast, think deep, automate everything."
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=aaronagent&theme=github-dark-blue&hide_border=true&background=0d1117&ring=58a6ff&fire=58a6ff&currStreakLabel=58a6ff" height="170" />
 
 </div>
-
----
-
-## 🏛️ Background
-
-```
-2020-2024   Tsinghua University        B.S. Computer Science
-2024-now    Major US Tech Company      AI Engineer
-```
-
-> 从 NLP/语音合成研究起步，到产品级 AI Agent 系统，再到量化交易策略。<br>
-> 喜欢把复杂的东西拆清楚，然后做成别人也能用的工具。
 
 ---
 
