@@ -22,9 +22,15 @@ exports.
 Useful starting points:
 
 - Debugging walkthrough: https://aaronlab.github.io/browsertrace/debug-browser-agent-failure.html
-- Public-safe demo export: https://github.com/aaronlab/browsertrace/releases/download/v0.1.10/browsertrace-demo-public.html
+- Public-safe demo export: https://github.com/aaronlab/browsertrace/releases/download/v0.1.11/browsertrace-demo-public.html
 - Roadmap: https://github.com/aaronlab/browsertrace/blob/main/ROADMAP.md
 - Good first issue: https://github.com/aaronlab/browsertrace/issues/19
+
+No-install local check before PyPI publishing is enabled:
+
+```bash
+uvx --from "browsertrace[ui] @ git+https://github.com/aaronlab/browsertrace@v0.1.11" browsertrace doctor
+```
 
 If you build browser agents, the most useful feedback is which failure context
 your current logs do not capture.
