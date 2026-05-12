@@ -12,17 +12,17 @@ launch, use these links:
 
 ## Featured Project: BrowserTrace
 
-BrowserTrace is a local flight recorder for AI browser agents.
+BrowserTrace is a local replay debugger for Browser Use failures.
 
-It helps Browser Use, Stagehand, Skyvern, Playwright + LLM, and custom
-computer-use builders debug failed browser-agent runs with local timelines,
-screenshots, URLs, actions, model input/output, errors, and public-safe HTML
-exports.
+It helps Browser Use builders replay failed browser-agent runs with local
+timelines, screenshots, URLs, actions, model input/output, errors, and
+public-safe HTML exports. Stagehand, Skyvern, Playwright + LLM, and custom
+computer-use workflows are supported as secondary integrations.
 
 Useful starting points:
 
 - Debugging walkthrough: https://aaronlab.github.io/browsertrace/debug-browser-agent-failure.html
-- Public-safe demo export: https://github.com/aaronlab/browsertrace/releases/download/v0.1.17/browsertrace-demo-public.html
+- Public-safe demo export: https://github.com/aaronlab/browsertrace/releases/download/v0.1.18/browsertrace-demo-public.html
 - Roadmap: https://github.com/aaronlab/browsertrace/blob/main/ROADMAP.md
 - Good first issue queue: https://github.com/aaronlab/browsertrace/labels/good%20first%20issue
 
